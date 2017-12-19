@@ -37,16 +37,28 @@ class ViewController: UIViewController {
     // make sure to apple the correct encapsulation principles in your classes
     private let previousButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Prev", for: .normal)
+        button.setTitle("PREV", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.setTitleColor(.gray, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     private let nextButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Next", for: .normal)
+        button.setTitle("NEXT", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
+    }()
+    
+    private let pageControl: UIPageControl = {
+        let pc = UIPageControl()
+        pc.currentPage = 0
+        pc.numberOfPages = 4
+        pc.currentPageIndicatorTintColor = .red
+        pc.pageIndicatorTintColor = .gray
+        return pc
     }()
     
     override func viewDidLoad() {
@@ -73,10 +85,10 @@ class ViewController: UIViewController {
 //        let blueView = UIView()
 //        blueView.backgroundColor = .blue
         
-        let bottomControlsStackView = UIStackView(arrangedSubviews: [previousButton, greenView, nextButton])
+        let bottomControlsStackView = UIStackView(arrangedSubviews: [previousButton, pageControl, nextButton])
         bottomControlsStackView.translatesAutoresizingMaskIntoConstraints = false
         bottomControlsStackView.distribution = .fillEqually
-        
+        view.addSubview(bottomControlsStackView)
         
         NSLayoutConstraint.activate([
 //                previousButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
