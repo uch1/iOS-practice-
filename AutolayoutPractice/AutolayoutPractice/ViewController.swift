@@ -64,16 +64,16 @@ class ViewController: UIViewController {
 //        previousButton.backgroundColor = .red
 //        previousButton.frame = CGRect(x: 0, y: 0, width: 200, height: 50)
         
-        let yellowView = UIView()
-        yellowView.backgroundColor = .yellow
+//        let yellowView = UIView()
+//        yellowView.backgroundColor = .yellow
         
         let greenView = UIView()
         greenView.backgroundColor = .green
         
-        let blueView = UIView()
-        blueView.backgroundColor = .blue
+//        let blueView = UIView()
+//        blueView.backgroundColor = .blue
         
-        let bottomControlsStackView = UIStackView(arrangedSubviews: [yellowView, greenView, blueView])
+        let bottomControlsStackView = UIStackView(arrangedSubviews: [previousButton, greenView, nextButton])
         bottomControlsStackView.translatesAutoresizingMaskIntoConstraints = false
         bottomControlsStackView.distribution = .fillEqually
         
