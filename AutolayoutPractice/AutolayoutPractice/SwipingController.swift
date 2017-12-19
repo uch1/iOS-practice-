@@ -13,8 +13,9 @@ class SwipingController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView?.backgroundColor = .green
-        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cellId")
+        collectionView?.backgroundColor = .white
+        collectionView?.register(PageCell.self, forCellWithReuseIdentifier: "cellId")
+        collectionView?.isPagingEnabled = true
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -23,7 +24,7 @@ class SwipingController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath)
-        cell.backgroundColor = .red
+        //cell.backgroundColor = indexPath.item % 2 == 0 ? .red : .green
         return cell
     }
     
@@ -35,6 +36,9 @@ extension SwipingController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: view.frame.width, height: view.frame.height)
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
 }
 
 
