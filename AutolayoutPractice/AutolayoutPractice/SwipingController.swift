@@ -40,8 +40,10 @@ class SwipingController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! PageCell
         
         let page = pages[indexPath.item]
-        cell.thumbImageView.image = UIImage(named: page.imageName)
-        cell.descriptionTextView.text = page.headerText
+        cell.page = page
+        
+//        cell.thumbImageView.image = UIImage(named: page.imageName)
+//        cell.descriptionTextView.text = page.headerText
         
 //        let imageName = imageNames[indexPath.item]
 //        cell.thumbImageView.image = UIImage(named: imageName)

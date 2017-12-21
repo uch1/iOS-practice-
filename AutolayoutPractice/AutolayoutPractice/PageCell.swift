@@ -9,8 +9,18 @@
 import UIKit
 
 class PageCell: UICollectionViewCell {
+
+    var page: Page? {
+        didSet {
+            
+            guard let unwrappedPage = page else { return }
+            
+            thumbImageView.image = UIImage(named: unwrappedPage.imageName)
+//            print(page?.imageName)
+        }
+    }
     
-    let thumbImageView: UIImageView = {
+    private let thumbImageView: UIImageView = {
         let imageView = UIImageView(image: #imageLiteral(resourceName: "thumbs-up-icon-blue-hi"))
         imageView.contentMode = .scaleAspectFit
         // this enables autolayout for our imageview
@@ -18,7 +28,7 @@ class PageCell: UICollectionViewCell {
         return imageView
     }()
     
-    let descriptionTextView: UITextView = {
+    private let descriptionTextView: UITextView = {
         let textView = UITextView()
         let attributeText = NSMutableAttributedString(string: "Join us today in our fun and games!", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18)])
         attributeText.append(NSAttributedString(string: "\n\n\nAre you ready for loads and loads of fun? Don't wait any longer! We hope to see you in our stores soon.", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 13), NSAttributedStringKey.foregroundColor: UIColor.gray]))
