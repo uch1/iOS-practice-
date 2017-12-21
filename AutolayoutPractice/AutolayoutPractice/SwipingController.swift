@@ -8,17 +8,12 @@
 
 import UIKit
 
-struct Page {
-    let imageName: String
-    let headerText: String
-}
-
 class SwipingController: UICollectionViewController {
     
     var pages = [
-        Page(imageName: "thumbs-up-icon-blue-hi", headerText: "Join us today in our fun and games!"),
-        Page(imageName: "aom-kickstarter-funded", headerText: "Subscribe and get coupons on our daily events"),
-        Page(imageName: "left-arrow", headerText: "VIP members special services")
+        Page(imageName: "thumbs-up-icon-blue-hi", headerText: "Join us today in our fun and games!", bodyText: "Are you ready for loads and loads of fun? Don't wait any longer! We hope to see you in our stores soon."),
+        Page(imageName: "aom-kickstarter-funded", headerText: "Subscribe and get coupons on our daily events", bodyText: "Get notified of the savings immediately when we announce them on our website. Make sure to also give us any feedback you have."),
+        Page(imageName: "left-arrow", headerText: "VIP members special services", bodyText: "Once you subscribed as a VIP member, you'll have full access to our live sport games.")
     ]
     
 //    var imageNames = ["thumbs-up-icon-blue-hi", "aom-kickstarter-funded", "left-arrow"]

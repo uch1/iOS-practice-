@@ -16,7 +16,12 @@ class PageCell: UICollectionViewCell {
             guard let unwrappedPage = page else { return }
             
             thumbImageView.image = UIImage(named: unwrappedPage.imageName)
-//            print(page?.imageName)
+            
+            let attributeText = NSMutableAttributedString(string: unwrappedPage.headerText, attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18)])
+            attributeText.append(NSAttributedString(string: "\n\n\n\(unwrappedPage.bodyText)", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 13), NSAttributedStringKey.foregroundColor: UIColor.gray]))
+            
+            descriptionTextView.attributedText = attributeText
+            descriptionTextView.textAlignment = .center
         }
     }
     
