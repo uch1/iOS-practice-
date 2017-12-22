@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		80D07C121FED85B3001F90F8 /* SwipingController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D07C111FED85B3001F90F8 /* SwipingController+Extension.swift */; };
+		80D07C191FED8843001F90F8 /* SwipingController+UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D07C181FED8843001F90F8 /* SwipingController+UICollectionView.swift */; };
 		80D984601FE917ED00FACB61 /* SwipingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D9845F1FE917ED00FACB61 /* SwipingController.swift */; };
 		80D984621FE9244600FACB61 /* PageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D984611FE9244600FACB61 /* PageCell.swift */; };
 		80D984641FE98C4B00FACB61 /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D984631FE98C4B00FACB61 /* Page.swift */; };
@@ -18,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		80D07C111FED85B3001F90F8 /* SwipingController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwipingController+Extension.swift"; sourceTree = "<group>"; };
+		80D07C181FED8843001F90F8 /* SwipingController+UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwipingController+UICollectionView.swift"; sourceTree = "<group>"; };
 		80D9845F1FE917ED00FACB61 /* SwipingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipingController.swift; sourceTree = "<group>"; };
 		80D984611FE9244600FACB61 /* PageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageCell.swift; sourceTree = "<group>"; };
 		80D984631FE98C4B00FACB61 /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
@@ -41,6 +45,49 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		80D07C131FED873E001F90F8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				80D984631FE98C4B00FACB61 /* Page.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		80D07C141FED874F001F90F8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				80D984611FE9244600FACB61 /* PageCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		80D07C151FED875E001F90F8 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				80EC70241FE8A57500ADE635 /* ViewController.swift */,
+				80D9845F1FE917ED00FACB61 /* SwipingController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		80D07C161FED8798001F90F8 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				80D07C111FED85B3001F90F8 /* SwipingController+Extension.swift */,
+				80D07C181FED8843001F90F8 /* SwipingController+UICollectionView.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		80D07C171FED87D4001F90F8 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				80EC702B1FE8A57500ADE635 /* LaunchScreen.storyboard */,
+				80EC70261FE8A57500ADE635 /* Main.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
 		80EC70161FE8A57400ADE635 = {
 			isa = PBXGroup;
 			children = (
@@ -60,15 +107,14 @@
 		80EC70211FE8A57400ADE635 /* AutolayoutPractice */ = {
 			isa = PBXGroup;
 			children = (
+				80D07C131FED873E001F90F8 /* Model */,
+				80D07C141FED874F001F90F8 /* Views */,
+				80D07C151FED875E001F90F8 /* Controllers */,
+				80D07C161FED8798001F90F8 /* Extensions */,
+				80D07C171FED87D4001F90F8 /* Storyboard */,
 				80EC70221FE8A57500ADE635 /* AppDelegate.swift */,
-				80EC70241FE8A57500ADE635 /* ViewController.swift */,
-				80EC70261FE8A57500ADE635 /* Main.storyboard */,
 				80EC70291FE8A57500ADE635 /* Assets.xcassets */,
-				80EC702B1FE8A57500ADE635 /* LaunchScreen.storyboard */,
 				80EC702E1FE8A57500ADE635 /* Info.plist */,
-				80D9845F1FE917ED00FACB61 /* SwipingController.swift */,
-				80D984611FE9244600FACB61 /* PageCell.swift */,
-				80D984631FE98C4B00FACB61 /* Page.swift */,
 			);
 			path = AutolayoutPractice;
 			sourceTree = "<group>";
@@ -148,6 +194,8 @@
 				80EC70251FE8A57500ADE635 /* ViewController.swift in Sources */,
 				80EC70231FE8A57500ADE635 /* AppDelegate.swift in Sources */,
 				80D984621FE9244600FACB61 /* PageCell.swift in Sources */,
+				80D07C191FED8843001F90F8 /* SwipingController+UICollectionView.swift in Sources */,
+				80D07C121FED85B3001F90F8 /* SwipingController+Extension.swift in Sources */,
 				80D984601FE917ED00FACB61 /* SwipingController.swift in Sources */,
 				80D984641FE98C4B00FACB61 /* Page.swift in Sources */,
 			);

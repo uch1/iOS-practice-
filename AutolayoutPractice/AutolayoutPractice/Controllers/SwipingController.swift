@@ -8,22 +8,8 @@
 
 import UIKit
 
-class SwipingController: UICollectionViewController {
+class SwipingController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    /* When the size-change/rotation (iPhone's screen) is notified, viewWillTransition will redraw the collectionViewLayout and support the layout of portrait and landscape mode.
-     */
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        
-        coordinator.animate(alongsideTransition: { (_) in
-            self.collectionViewLayout.invalidateLayout()
-            
-            let indexPath = IndexPath(item: self.pageControl.currentPage, section: 0)
-            self.collectionView?.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-            
-        }) { (_) in
-            
-        }
-    }
     
     var pages = [
         Page(imageName: "thumbs-up-icon-blue-hi", headerText: "Join us today in our fun and games!", bodyText: "Are you ready for loads and loads of fun? Don't wait any longer! We hope to see you in our stores soon."),
@@ -69,7 +55,7 @@ class SwipingController: UICollectionViewController {
         collectionView?.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
     
-    private lazy var pageControl: UIPageControl = {
+    lazy var pageControl: UIPageControl = {
         let pc = UIPageControl()
         pc.currentPage = 0
         pc.numberOfPages = pages.count
@@ -124,39 +110,19 @@ class SwipingController: UICollectionViewController {
         collectionView?.register(PageCell.self, forCellWithReuseIdentifier: "cellId")
         collectionView?.isPagingEnabled = true
     }
-    
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return pages.count
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! PageCell
-        
-        let page = pages[indexPath.item]
-        cell.page = page
-        
-//        cell.thumbImageView.image = UIImage(named: page.imageName)
-//        cell.descriptionTextView.text = page.headerText
-        
-//        let imageName = imageNames[indexPath.item]
-//        cell.thumbImageView.image = UIImage(named: imageName)
-//        cell.descriptionTextView.text = headerStrings[indexPath.item]
-        //cell.backgroundColor = indexPath.item % 2 == 0 ? .red : .green
-        return cell
-    }
-    
+
 }
 
-extension SwipingController: UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: view.frame.height)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-}
+//extension SwipingController: UICollectionViewDelegateFlowLayout {
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        return CGSize(width: view.frame.width, height: view.frame.height)
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+//        return 0
+//    }
+//}
 
 
 
