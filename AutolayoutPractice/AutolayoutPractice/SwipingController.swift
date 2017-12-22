@@ -16,11 +16,79 @@ class SwipingController: UICollectionViewController {
         Page(imageName: "left-arrow", headerText: "VIP members special services", bodyText: "Once you subscribed as a VIP member, you'll have full access to our live sport games.")
     ]
     
-//    var imageNames = ["thumbs-up-icon-blue-hi", "aom-kickstarter-funded", "left-arrow"]
-//    var headerStrings = ["Join us today in our fun and games!", "Subscribe and get coupons on our daily events", "VIP members special services"]
+    
+    // make sure to apply the correct encapsulation principles in your classes
+    private let previousButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("PREV", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.setTitleColor(.gray, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private let nextButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("NEXT", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitleColor(.mainPink, for: .normal)
+        button.addTarget(self, action: #selector(handleNext), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc private func handleNext() {
+        print("Trying to advance to next")
+        
+        let nextIndex = min(pageControl.currentPage + 1, pages.count - 1)
+        let indexPath = IndexPath(item: nextIndex, section: 0)
+        
+        pageControl.currentPage = nextIndex
+        collectionView?.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+    
+    }
+    
+    private let pageControl: UIPageControl = {
+        let pc = UIPageControl()
+        pc.currentPage = 0
+        pc.numberOfPages = 4
+        pc.currentPageIndicatorTintColor = .mainPink
+        pc.pageIndicatorTintColor = UIColor(red: 249/255, green: 207/255, blue: 224/255, alpha: 1)
+        return pc
+    }()
+    
+    fileprivate func setupBottomControls() {
+        //        view.addSubview(previousButton)
+        //        previousButton.backgroundColor = .red
+        //        previousButton.frame = CGRect(x: 0, y: 0, width: 200, height: 50)
+        
+        //        let yellowView = UIView()
+        //        yellowView.backgroundColor = .yellow
+        
+        let greenView = UIView()
+        greenView.backgroundColor = .green
+        
+        //        let blueView = UIView()
+        //        blueView.backgroundColor = .blue
+        
+        let bottomControlsStackView = UIStackView(arrangedSubviews: [previousButton, pageControl, nextButton])
+        bottomControlsStackView.translatesAutoresizingMaskIntoConstraints = false
+        bottomControlsStackView.distribution = .fillEqually
+        view.addSubview(bottomControlsStackView)
+        
+        NSLayoutConstraint.activate([
+            //                previousButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            bottomControlsStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            bottomControlsStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            bottomControlsStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            bottomControlsStackView.heightAnchor.constraint(equalToConstant: 50)
+            ])
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupBottomControls()
         
         collectionView?.backgroundColor = .white
         collectionView?.register(PageCell.self, forCellWithReuseIdentifier: "cellId")

@@ -36,7 +36,7 @@ class ViewController: UIViewController {
         return textView
     }()
     
-    // make sure to apple the correct encapsulation principles in your classes
+    // make sure to apply the correct encapsulation principles in your classes
     private let previousButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("PREV", for: .normal)
