@@ -20,12 +20,21 @@ class SwipingController: UICollectionViewController {
     // make sure to apply the correct encapsulation principles in your classes
     private let previousButton: UIButton = {
         let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("PREV", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         button.setTitleColor(.gray, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(handlePrev), for: .touchUpInside)
         return button
     }()
+    
+    @objc private func handlePrev() {
+        let prevIndex = max(pageControl.currentPage - 1, 0)
+        let indexPath = IndexPath(item: prevIndex, section: 0)
+        
+        pageControl.currentPage = prevIndex
+        collectionView?.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+    }
     
     private let nextButton: UIButton = {
         let button = UIButton(type: .system)
@@ -38,20 +47,17 @@ class SwipingController: UICollectionViewController {
     }()
     
     @objc private func handleNext() {
-        print("Trying to advance to next")
-        
         let nextIndex = min(pageControl.currentPage + 1, pages.count - 1)
         let indexPath = IndexPath(item: nextIndex, section: 0)
         
         pageControl.currentPage = nextIndex
         collectionView?.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-    
     }
     
-    private let pageControl: UIPageControl = {
+    private lazy var pageControl: UIPageControl = {
         let pc = UIPageControl()
         pc.currentPage = 0
-        pc.numberOfPages = 4
+        pc.numberOfPages = pages.count
         pc.currentPageIndicatorTintColor = .mainPink
         pc.pageIndicatorTintColor = UIColor(red: 249/255, green: 207/255, blue: 224/255, alpha: 1)
         return pc
