@@ -91,6 +91,15 @@ class SwipingController: UICollectionViewController {
             ])
     }
     
+    
+    override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        
+        let x = targetContentOffset.pointee.x
+        pageControl.currentPage = Int(x/view.frame.width)
+        //print(x, view.frame.width, x/view.frame.width)
+        // find the exact page number for each cell
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
