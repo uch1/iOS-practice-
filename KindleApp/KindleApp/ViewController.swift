@@ -8,33 +8,25 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UITableViewController {
 
+    var books: [Book]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.title = "Kindle"
         view.backgroundColor = .red
-        
+        setUpBooks()
+    }
+
+    func setUpBooks() {
         let page1 = Page(number: 1, text: "Text for the first page")
         let page2 = Page(number: 2, text: "This text for the second page")
         
         let pages = [page1, page2]
         
-        let book = Book(title: "Steve Jobs", author: "Walter Issacson", pages: pages)
-
-//        let firstPage = book.pages[0]
-        
-//        if page.number == 2 {
-//            print(firstPage.text)
-//        }
-//
-//        for page in book.pages {
-//
-//            if page.number == 1 {
-//                print(page.text)
-//            }
-//
-//        }
+        let book1 = Book(title: "Steve Jobs", author: "Walter Issacson", pages: pages)
         
         let book2 = Book(title: "Bill Gates Biography", author: "Michael Becraft", pages: [
             Page(number: 1, text: "Text for page 1"),
@@ -43,14 +35,26 @@ class ViewController: UIViewController {
             Page(number: 4, text: "Text for page 4")
             ])
         
-        for book in [book, book2] {
-            print(book.title)
-            for page in book.pages {
-                print(page.text)
+        self.books = [book1, book2]
+        
+        //        guard let books = self.books else { return }
+        //        for book in books {
+        //            print(book.title)
+        //            for page in book.pages {
+        //                print(page.text)
+        //            }
+        //        }
+        
+        if let unwrappedBooks = self.books {
+            for book in unwrappedBooks {
+                print(book.title)
+                for page in book.pages {
+                    print(page.text)
+                }
             }
         }
-        
-    }
 
+    }
+    
 }
 
