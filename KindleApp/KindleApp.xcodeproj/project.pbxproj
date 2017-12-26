@@ -14,6 +14,7 @@
 		80694A081FEDA87100713FDB /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80694A071FEDA87100713FDB /* Book.swift */; };
 		809498891FF24CC500F29653 /* BookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809498881FF24CC500F29653 /* BookCell.swift */; };
 		8094988B1FF2818900F29653 /* BookPagerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8094988A1FF2818900F29653 /* BookPagerController.swift */; };
+		8094988D1FF2ED9B00F29653 /* PageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8094988C1FF2ED9B00F29653 /* PageCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		80694A071FEDA87100713FDB /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		809498881FF24CC500F29653 /* BookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCell.swift; sourceTree = "<group>"; };
 		8094988A1FF2818900F29653 /* BookPagerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookPagerController.swift; sourceTree = "<group>"; };
+		8094988C1FF2ED9B00F29653 /* PageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				80694A061FEDA85100713FDB /* Model */,
 				806949F41FED972B00713FDB /* AppDelegate.swift */,
 				809498881FF24CC500F29653 /* BookCell.swift */,
+				8094988C1FF2ED9B00F29653 /* PageCell.swift */,
 				806949F61FED972B00713FDB /* ViewController.swift */,
 				8094988A1FF2818900F29653 /* BookPagerController.swift */,
 				806949FB1FED972B00713FDB /* Assets.xcassets */,
@@ -151,6 +154,7 @@
 			files = (
 				809498891FF24CC500F29653 /* BookCell.swift in Sources */,
 				8094988B1FF2818900F29653 /* BookPagerController.swift in Sources */,
+				8094988D1FF2ED9B00F29653 /* PageCell.swift in Sources */,
 				806949F71FED972B00713FDB /* ViewController.swift in Sources */,
 				806949F51FED972B00713FDB /* AppDelegate.swift in Sources */,
 				80694A081FEDA87100713FDB /* Book.swift in Sources */,

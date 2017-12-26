@@ -20,7 +20,7 @@ class BookPagerController: UICollectionViewController {
     
     func setupCollectionViewLayout() {
         collectionView?.backgroundColor = .white
-        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView?.register(PageCell.self, forCellWithReuseIdentifier: cellId)
         collectionView?.isPagingEnabled = true
         
         let layout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout
@@ -43,11 +43,11 @@ extension BookPagerController: UICollectionViewDelegateFlowLayout {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
         
-        if indexPath.item % 2 == 0 {
+        /*if indexPath.item % 2 == 0 {
             cell.backgroundColor = .red
         } else {
             cell.backgroundColor = .blue
-        }
+        }*/
         
         return cell
     }
