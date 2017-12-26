@@ -9,14 +9,18 @@
 import UIKit
 
 class ViewController: UITableViewController {
-
+    let cellId = "cellId"
+    
     var books: [Book]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
+        tableView.tableFooterView = UIView()
+        
         navigationItem.title = "Kindle"
-        view.backgroundColor = .red
+
         setUpBooks()
     }
 
@@ -36,25 +40,37 @@ class ViewController: UITableViewController {
             ])
         
         self.books = [book1, book2]
-        
-        //        guard let books = self.books else { return }
-        //        for book in books {
-        //            print(book.title)
-        //            for page in book.pages {
-        //                print(page.text)
-        //            }
-        //        }
-        
-        if let unwrappedBooks = self.books {
-            for book in unwrappedBooks {
-                print(book.title)
-                for page in book.pages {
-                    print(page.text)
-                }
-            }
-        }
-
     }
     
 }
+
+// UITableViewController Delegate and DataSource Methods
+extension ViewController {
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
+        let book = books?[indexPath.row]
+        
+        cell.textLabel?.text = book?.title
+        return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        if count = books?.count {
+//            return count
+//        }
+//        return 0
+        guard let unwrappedBooks = books else { return 0 }
+        return unwrappedBooks.count
+    }
+    
+}
+
+
+
+
 
