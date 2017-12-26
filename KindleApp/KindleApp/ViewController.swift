@@ -46,6 +46,14 @@ class ViewController: UITableViewController {
 // UITableViewController Delegate and DataSource Methods
 extension ViewController {
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Setup collection view layout 
+        let layout = UICollectionViewFlowLayout()
+        let bookPageController = BookPagerController(collectionViewLayout: layout)
+        let navController = UINavigationController(rootViewController: bookPageController)
+        present(navController, animated: true, completion: nil)
+    }
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 86
     }
