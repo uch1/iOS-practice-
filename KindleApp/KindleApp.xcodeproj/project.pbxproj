@@ -12,6 +12,7 @@
 		806949FC1FED972B00713FDB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 806949FB1FED972B00713FDB /* Assets.xcassets */; };
 		806949FF1FED972B00713FDB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 806949FD1FED972B00713FDB /* LaunchScreen.storyboard */; };
 		80694A081FEDA87100713FDB /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80694A071FEDA87100713FDB /* Book.swift */; };
+		809498891FF24CC500F29653 /* BookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809498881FF24CC500F29653 /* BookCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		806949FE1FED972B00713FDB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		80694A001FED972B00713FDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		80694A071FEDA87100713FDB /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
+		809498881FF24CC500F29653 /* BookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			children = (
 				80694A061FEDA85100713FDB /* Model */,
 				806949F41FED972B00713FDB /* AppDelegate.swift */,
+				809498881FF24CC500F29653 /* BookCell.swift */,
 				806949F61FED972B00713FDB /* ViewController.swift */,
 				806949FB1FED972B00713FDB /* Assets.xcassets */,
 				806949FD1FED972B00713FDB /* LaunchScreen.storyboard */,
@@ -143,6 +146,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				809498891FF24CC500F29653 /* BookCell.swift in Sources */,
 				806949F71FED972B00713FDB /* ViewController.swift in Sources */,
 				806949F51FED972B00713FDB /* AppDelegate.swift in Sources */,
 				80694A081FEDA87100713FDB /* Book.swift in Sources */,
