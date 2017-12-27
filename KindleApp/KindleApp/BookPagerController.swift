@@ -10,8 +10,7 @@ import UIKit
 
 class BookPagerController: UICollectionViewController {
     
-    //ResuseIdentifier
-    let cellId = "cellId"
+    let cellId = "cellId" //ResuseIdentifier
     
     var book: Book?
     
@@ -22,6 +21,11 @@ class BookPagerController: UICollectionViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(handleCloseBook))
         setupCollectionViewLayout()
     }
+    
+}
+
+// MARK: Methods
+extension BookPagerController {
     
     @objc func handleCloseBook() {
         dismiss(animated: true, completion: nil)
@@ -39,6 +43,7 @@ class BookPagerController: UICollectionViewController {
     
 }
 
+// MARK: UICollectionView Delegate and DataSource Methods
 extension BookPagerController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

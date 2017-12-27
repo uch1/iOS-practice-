@@ -21,8 +21,30 @@ class ViewController: UITableViewController {
         
         navigationItem.title = "Kindle"
         setUpBooks()
+        fetchBooks()
     }
 
+    func fetchBooks() {
+        print("Fetching books...")
+        if let url = URL(string: "https://letsbuildthatapp-videos.s3-us-west-2.amazonaws.com/kindle.json") {
+            URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
+                
+                if let error = error {
+                    print("Failed to fetch external json books:", error)
+                    return
+                }
+//                print(response)
+
+                guard let data = data else { return }
+                guard let dataString = String(data: data, encoding: .utf8) else { return }
+                print(dataString)
+                
+            }).resume()
+            
+            print("Have we fetched our books yet?")
+        }
+    }
+    
     func setUpBooks() {
         let page1 = Page(number: 1, text: "Text for the first page")
         let page2 = Page(number: 2, text: "This text for the second page")
