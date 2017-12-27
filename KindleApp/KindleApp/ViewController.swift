@@ -36,12 +36,36 @@ class ViewController: UITableViewController {
 //                print(response)
 
                 guard let data = data else { return }
-                guard let dataString = String(data: data, encoding: .utf8) else { return }
-                print(dataString)
+                
+                // Try to parse Json but if it doesn't work throw an error message
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
+                    
+                    guard let bookDictionaries = json as? [[String: Any]] else { return }
+                    
+                    self.books = []
+                    for bookDictionary in bookDictionaries {
+                        if let title = bookDictionary["title"] as? String, let author = bookDictionary["author"] as? String {
+                            let book = Book(title: title, author: author, image: #imageLiteral(resourceName: "steve_jobs"), pages: [])
+                            self.books?.append(book)
+                        }
+                    }
+                    
+//                    print("All of our books:", self.books)
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                    
+                } catch let jsonError {
+                    print("Failed to parse JSON properly:", jsonError)
+                }
+                
+//                guard let dataString = String(data: data, encoding: .utf8) else { return }
+//                print(dataString)
                 
             }).resume()
             
-            print("Have we fetched our books yet?")
+//            print("Have we fetched our books yet?")
         }
     }
     
