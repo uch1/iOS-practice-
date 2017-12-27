@@ -47,9 +47,14 @@ class ViewController: UITableViewController {
 extension ViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let selectedBook = self.books?[indexPath.item]
         // Setup collection view layout 
         let layout = UICollectionViewFlowLayout()
         let bookPageController = BookPagerController(collectionViewLayout: layout)
+        
+        bookPageController.book = selectedBook
+        
         let navController = UINavigationController(rootViewController: bookPageController)
         present(navController, animated: true, completion: nil)
     }
@@ -63,15 +68,10 @@ extension ViewController {
         let book = books?[indexPath.row]
         
         cell.book = book
-        
         return cell
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if count = books?.count {
-//            return count
-//        }
-//        return 0
         guard let unwrappedBooks = books else { return 0 }
         return unwrappedBooks.count
     }

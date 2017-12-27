@@ -13,7 +13,6 @@ class PageCell: UICollectionViewCell {
     let textLabel: UILabel = {
         let label = UILabel()
         label.text = "Some Text Some Text Some TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome TextSome Text"
-        label.backgroundColor = .green
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         return label
@@ -22,7 +21,6 @@ class PageCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .yellow
         setupAutoLayout()
     }
     
