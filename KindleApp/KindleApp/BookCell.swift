@@ -12,9 +12,32 @@ class BookCell: UITableViewCell {
     
     var book: Book? {
         didSet {
-            coverImageView.image = book?.image
+//            coverImageView.image = book?.image
             titleLabel.text = book?.title
             authorLabel.text = book?.author
+            
+            guard let coverImageUrl = book?.coverImageUrl else { return }
+            guard let url = URL(string: coverImageUrl) else { return }
+            
+            // this is going reset an image and wait for a new image to load 
+            coverImageView.image = nil
+            
+            URLSession.shared.dataTask(with: url) { (data, response, error) in
+                
+                if let err = error {
+                    print("Failed to retreive our book cover image:", err)
+                    return
+                }
+                
+                guard let imageData = data else { return }
+                let image = UIImage(data: imageData)
+                
+                DispatchQueue.main.async {
+                    self.coverImageView.image = image
+                }
+                
+            }.resume()
+            
         }
     }
     
