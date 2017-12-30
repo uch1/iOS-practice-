@@ -12,6 +12,7 @@
 		8056DDA71FF6ED0500CD6EA9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8056DDA51FF6ED0500CD6EA9 /* Main.storyboard */; };
 		8056DDA91FF6ED0500CD6EA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8056DDA81FF6ED0500CD6EA9 /* Assets.xcassets */; };
 		8056DDAC1FF6ED0500CD6EA9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8056DDAA1FF6ED0500CD6EA9 /* LaunchScreen.storyboard */; };
+		80A30EB61FF7314B00585E1D /* UIColor+theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A30EB51FF7314B00585E1D /* UIColor+theme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		8056DDA81FF6ED0500CD6EA9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8056DDAB1FF6ED0500CD6EA9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8056DDAD1FF6ED0500CD6EA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		80A30EB51FF7314B00585E1D /* UIColor+theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+theme.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 				8056DDA81FF6ED0500CD6EA9 /* Assets.xcassets */,
 				8056DDAA1FF6ED0500CD6EA9 /* LaunchScreen.storyboard */,
 				8056DDAD1FF6ED0500CD6EA9 /* Info.plist */,
+				80A30EB51FF7314B00585E1D /* UIColor+theme.swift */,
 			);
 			path = IntermediateTraining;
 			sourceTree = "<group>";
@@ -136,6 +139,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				80A30EB61FF7314B00585E1D /* UIColor+theme.swift in Sources */,
 				8056DDA41FF6ED0500CD6EA9 /* CompaniesController.swift in Sources */,
 				8056DDA21FF6ED0500CD6EA9 /* AppDelegate.swift in Sources */,
 			);
