@@ -11,6 +11,12 @@ import UIKit
 class CompaniesController: UITableViewController {
 
     let cellId = "cellId" // is the identifier for the tableView.dequeueReusableCell
+    let companies = [
+        Company(name: "Apple", founded: Date()),
+        Company(name: "Google", founded: Date()),
+        Company(name: "Airbnb", founded: Date()),
+        Company(name: "SpaceX", founded: Date())
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,11 +24,9 @@ class CompaniesController: UITableViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
         setupTableViewStyle()
         setupNavigationItem()
-        setupNavigationStyle()
     }
     
     func setupTableViewStyle() {
-        
         tableView.backgroundColor = .darkGrayBlue
         // Used separatorStyle to remove the lines that come with the tableView
         //tableView.separatorStyle = .none
@@ -36,24 +40,16 @@ class CompaniesController: UITableViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "plus").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleAddCompany))
     }
     
+    // Once the plus button is tapped, func handleAppCompany will present the next viewController
     @objc func handleAddCompany() {
         print("Adding company...")
+        
+        let createCompanyController = CreateCompanyController()
+        
+        let navController = CustomNavigationController(rootViewController: createCompanyController)
+        present(navController, animated: true, completion: nil)
     }
     
-    // This func setups the navigation bar style
-    func setupNavigationStyle() {
-        
-        // This will set the nav bar color to a light red color
-        navigationController?.navigationBar.barTintColor = .lightRed
-        // This will disable the navbar's translucency
-        navigationController?.navigationBar.isTranslucent = false
-        // When the tablview is scrolled, this will resize the title text
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
-        // This will make nav bar's font bold
-        navigationController?.navigationBar.prefersLargeTitles = true
-        // Set the color of the font to white
-        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
-    }
 }
 
 // TableView Delegate and DataSource Methods
@@ -61,15 +57,15 @@ class CompaniesController: UITableViewController {
 extension CompaniesController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 8
+        return companies.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
+        let company = companies[indexPath.row]
         
         cell.backgroundColor = .tealColor
-        
-        cell.textLabel?.text = "The Company"
+        cell.textLabel?.text = company.name
         cell.textLabel?.textColor = .white
         cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         
