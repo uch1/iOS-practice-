@@ -7,16 +7,43 @@
 //
 
 import UIKit
+import CoreData
 
-class CompaniesController: UITableViewController {
+class CompaniesController: UITableViewController, CreateCompanyControllerDelegate {
 
     let cellId = "cellId" // is the identifier for the tableView.dequeueReusableCell
-    let companies = [
-        Company(name: "Apple", founded: Date()),
-        Company(name: "Google", founded: Date()),
-        Company(name: "Airbnb", founded: Date()),
-        Company(name: "SpaceX", founded: Date())
-    ]
+    var companies = [Company]()
+//    var companies = [
+//        Company(name: "Apple", founded: Date()),
+//        Company(name: "Google", founded: Date()),
+//        Company(name: "Airbnb", founded: Date()),
+//        Company(name: "SpaceX", founded: Date())
+//    ]
+    private func fetchCompanies() {
+        // attemp my core data fetch somehow
+        let persistentContainer = NSPersistentContainer(name: "IntermediateTrainingModels")
+        persistentContainer.loadPersistentStores { (storeDescription, error) in
+            if let error = error {
+                fatalError("Loading of store failed: \(error)")
+            }
+        }
+        
+        let context = persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<Company>(entityName: "Company")
+        
+        do {
+            let companies = try context.fetch(fetchRequest)
+            
+            companies.forEach({ (company) in
+                print(company.name ?? "")
+            })
+            
+        } catch let fetchError {
+            print("Failed to fetch error:", fetchError)
+        }
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,9 +72,18 @@ class CompaniesController: UITableViewController {
         print("Adding company...")
         
         let createCompanyController = CreateCompanyController()
-        
         let navController = CustomNavigationController(rootViewController: createCompanyController)
+        
+        createCompanyController.delegate = self
+        
         present(navController, animated: true, completion: nil)
+    }
+    
+    
+    func didAddCompany(company: Company) {
+        companies.append(company)
+        let newIndexPath = IndexPath(row: companies.count - 1, section: 0)
+        tableView.insertRows(at: [newIndexPath], with: .automatic)
     }
     
 }
