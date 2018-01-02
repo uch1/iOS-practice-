@@ -13,20 +13,8 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
 
     let cellId = "cellId" // is the identifier for the tableView.dequeueReusableCell
     var companies = [Company]()
-//    var companies = [
-//        Company(name: "Apple", founded: Date()),
-//        Company(name: "Google", founded: Date()),
-//        Company(name: "Airbnb", founded: Date()),
-//        Company(name: "SpaceX", founded: Date())
-//    ]
+
     private func fetchCompanies() {
-        // attemp my core data fetch somehow
-//        let persistentContainer = NSPersistentContainer(name: "IntermediateTrainingModels")
-//        persistentContainer.loadPersistentStores { (storeDescription, error) in
-//            if let error = error {
-//                fatalError("Loading of store failed: \(error)")
-//            }
-//        }
         
         let context = CoreDataManager.shared.presistentContainer.viewContext
         
@@ -50,7 +38,7 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        view.backgroundColor = .white
+        
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
         setupTableViewStyle()
         setupNavigationItem()
@@ -110,6 +98,36 @@ extension CompaniesController {
         cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (_, indexPath) in
+            let company = self.companies[indexPath.row]
+            print("Attempting to delete company:", company.name ?? "")
+            
+            // remove the company from our tableview
+            self.companies.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            
+            // delete the company from Core Data
+            let context = CoreDataManager.shared.presistentContainer.viewContext
+            context.delete(company)
+            
+            do {
+                try context.save()
+            } catch let saveError {
+                print("Failed to delete company:", saveError)
+            }
+            
+        }
+        
+        let editAction = UITableViewRowAction(style: .normal, title: "Edit") { (_, indexPath) in
+            //let company = self.companies[indexPath.row]
+            print("Editing company...")
+        }
+        
+        return [deleteAction, editAction]
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
