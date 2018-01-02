@@ -78,21 +78,29 @@ class CreateCompanyController: UIViewController {
         print("Save company..")
         
         // Initialization of our Core Data stack
-        let persistentContainer = NSPersistentContainer(name: "IntermediateTrainingModels")
-        persistentContainer.loadPersistentStores { (storeDescription, error) in
-            if let error = error {
-                fatalError("Loading of store failed: \(error)")
-            }
-        }
-        
-        let context = persistentContainer.viewContext
+//        let persistentContainer = NSPersistentContainer(name: "IntermediateTrainingModels")
+//        persistentContainer.loadPersistentStores { (storeDescription, error) in
+//            if let error = error {
+//                fatalError("Loading of store failed: \(error)")
+//            }
+//        }
+//
+//        let context = persistentContainer.viewContext
+        let context = CoreDataManager.shared.presistentContainer.viewContext
         
         let company = NSEntityDescription.insertNewObject(forEntityName: "Company", into: context)
+        
         company.setValue(nameTextField.text, forKey: "name")
         
         // perform the save
         do {
             try context.save()
+            
+            // success
+            dismiss(animated: true, completion: {
+                self.delegate?.didAddCompany(company: company as! Company)
+            })
+            
         } catch let saveError {
             print("Failed to save company:", saveError)
         }
