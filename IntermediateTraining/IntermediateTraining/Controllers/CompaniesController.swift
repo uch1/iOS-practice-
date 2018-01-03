@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 class CompaniesController: UITableViewController, CreateCompanyControllerDelegate {
-
+    
     let cellId = "cellId" // is the identifier for the tableView.dequeueReusableCell
     var companies = [Company]()
 
@@ -62,7 +62,6 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
     // Once the plus button is tapped, func handleAppCompany will present the next viewController
     @objc func handleAddCompany() {
         print("Adding company...")
-        
         let createCompanyController = CreateCompanyController()
         let navController = CustomNavigationController(rootViewController: createCompanyController)
         
@@ -78,6 +77,14 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
         tableView.insertRows(at: [newIndexPath], with: .automatic)
     }
     
+    func didEditCompany(company: Company) {
+        // update my tableview somehow
+        guard let row = companies.index(of: company) else { return }
+        //let row = companies.index(of: company)
+        let reloadIndexPath = IndexPath(row: row, section: 0)
+        tableView.reloadRows(at: [reloadIndexPath], with: .middle)
+    }
+
 }
 
 // TableView Delegate and DataSource Methods
@@ -121,13 +128,24 @@ extension CompaniesController {
             }
             
         }
+        deleteAction.backgroundColor = UIColor.lightRed
         
-        let editAction = UITableViewRowAction(style: .normal, title: "Edit") { (_, indexPath) in
-            //let company = self.companies[indexPath.row]
-            print("Editing company...")
-        }
+        let editAction = UITableViewRowAction(style: .normal, title: "Edit", handler: editActionHandler)
+        editAction.backgroundColor = UIColor.darkGrayBlue
         
         return [deleteAction, editAction]
+    }
+    
+    private func editActionHandler(action: UITableViewRowAction, indexPath: IndexPath ) {
+        print("Editing company in seperate function")
+        
+        let editCompanyController = CreateCompanyController()
+        editCompanyController.company = companies[indexPath.row]
+        editCompanyController.delegate = self
+        
+        let navController = CustomNavigationController(rootViewController: editCompanyController)
+        
+        present(navController, animated: true, completion: nil)
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

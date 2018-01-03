@@ -12,10 +12,18 @@ import CoreData
 // Custom Delegation
 protocol CreateCompanyControllerDelegate {
     func didAddCompany(company: Company)
+    func didEditCompany(company: Company)
 }
 
 class CreateCompanyController: UIViewController {
     
+    var company: Company? {
+        didSet {
+            nameTextField.text = company?.name
+        }
+    }
+    
+    // not tightly-coupled 
     var delegate: CreateCompanyControllerDelegate?
     
     let lightBlueBackgroundView: UIView = {
@@ -39,6 +47,19 @@ class CreateCompanyController: UIViewController {
         return textField
     }()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // ternary snytax
+
+        navigationItem.title = company == nil ? "Create Company" : "Edit Company"
+//        if company == nil {
+//            navigationItem.title = "Create Company"
+//        } else {
+//            navigationItem.title = "Edit Company"
+//        }
+        // same as the code above
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,17 +96,34 @@ class CreateCompanyController: UIViewController {
     }
     
     @objc private func handleSave() {
+        if company == nil {
+            createCompany()
+        } else {
+            saveCompanyChanges()
+        }
+    }
+    
+    private func saveCompanyChanges() {
+        let context = CoreDataManager.shared.presistentContainer.viewContext
+
+        company?.name = nameTextField.text
+        
+        do {
+            try context.save()
+            // save succeeded 
+            dismiss(animated: true, completion: {
+                self.delegate?.didEditCompany(company: self.company!)
+            })
+            
+        } catch let saveError {
+            print("Failed to save changes:", saveError)
+        }
+        
+    }
+    
+    private func createCompany() {
         print("Save company..")
         
-        // Initialization of our Core Data stack
-//        let persistentContainer = NSPersistentContainer(name: "IntermediateTrainingModels")
-//        persistentContainer.loadPersistentStores { (storeDescription, error) in
-//            if let error = error {
-//                fatalError("Loading of store failed: \(error)")
-//            }
-//        }
-//
-//        let context = persistentContainer.viewContext
         let context = CoreDataManager.shared.presistentContainer.viewContext
         
         let company = NSEntityDescription.insertNewObject(forEntityName: "Company", into: context)
@@ -104,14 +142,6 @@ class CreateCompanyController: UIViewController {
         } catch let saveError {
             print("Failed to save company:", saveError)
         }
-        
-//        dismiss(animated: true) {
-//
-//            guard let name = self.nameTextField.text else { return }
-//            let company = Company(name: name, founded: Date())
-//
-//            self.delegate?.didAddCompany(company: company)
-//        }
     }
     
     @objc private func handleCancel() {
