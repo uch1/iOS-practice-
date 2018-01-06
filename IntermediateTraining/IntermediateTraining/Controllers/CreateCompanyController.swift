@@ -15,7 +15,7 @@ protocol CreateCompanyControllerDelegate {
     func didEditCompany(company: Company)
 }
 
-class CreateCompanyController: UIViewController {
+class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var company: Company? {
         didSet {
@@ -37,6 +37,39 @@ class CreateCompanyController: UIViewController {
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         return backgroundView
     }()
+    
+    lazy var coverImageView: UIImageView = {
+        let imageView = UIImageView(image: #imageLiteral(resourceName: "select_photo_empty"))
+        imageView.isUserInteractionEnabled = true // remember to do this, otherwise image views by default are not interactive
+        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSelectPhoto)))
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    @objc private func handleSelectPhoto() {
+        print("Trying to select photo")
+        
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
+        
+        present(imagePickerController, animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        if let editedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
+            coverImageView.image = editedImage
+            
+        } else if let originalImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            coverImageView.image = originalImage
+        }
+        
+    }
     
     let nameLabel: UILabel = {
         let label = UILabel()
@@ -86,10 +119,16 @@ class CreateCompanyController: UIViewController {
         lightBlueBackgroundView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         lightBlueBackgroundView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         lightBlueBackgroundView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        lightBlueBackgroundView.heightAnchor.constraint(equalToConstant: 250).isActive = true
+        lightBlueBackgroundView.heightAnchor.constraint(equalToConstant: 350).isActive = true
+        
+        view.addSubview(coverImageView)
+        coverImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 8).isActive = true
+        coverImageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        coverImageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        coverImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         view.addSubview(nameLabel)
-        nameLabel.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        nameLabel.topAnchor.constraint(equalTo: coverImageView.bottomAnchor).isActive = true
         nameLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
         nameLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
         nameLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
