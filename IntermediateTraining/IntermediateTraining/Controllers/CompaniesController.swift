@@ -100,7 +100,22 @@ extension CompaniesController {
         let company = companies[indexPath.row]
         
         cell.backgroundColor = .tealColor
-        cell.textLabel?.text = company.name
+        
+        if let name = company.name, let founded = company.founded {
+            // MMM dd yyyy
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MMM dd, yyyy"
+            
+            let foundedDateString = dateFormatter.string(from: founded)
+            
+            // let locale = Locale(identifier: "EN")
+            let dateString = "\(name) - Founded: \(foundedDateString)"
+            
+            cell.textLabel?.text = dateString
+        } else {
+            cell.textLabel?.text = company.name
+        }
+        
         cell.textLabel?.textColor = .white
         cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         
@@ -126,8 +141,8 @@ extension CompaniesController {
             } catch let saveError {
                 print("Failed to delete company:", saveError)
             }
-            
         }
+        
         deleteAction.backgroundColor = UIColor.lightRed
         
         let editAction = UITableViewRowAction(style: .normal, title: "Edit", handler: editActionHandler)
@@ -136,7 +151,7 @@ extension CompaniesController {
         return [deleteAction, editAction]
     }
     
-    private func editActionHandler(action: UITableViewRowAction, indexPath: IndexPath ) {
+    private func editActionHandler(action: UITableViewRowAction, indexPath: IndexPath) {
         print("Editing company in seperate function")
         
         let editCompanyController = CreateCompanyController()
