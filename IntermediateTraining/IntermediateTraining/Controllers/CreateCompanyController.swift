@@ -29,7 +29,6 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
             guard let founded = company?.founded else { return }
             datePicker.date = founded
             
-            
         }
     }
     
@@ -49,6 +48,7 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         return backgroundView
     }()
+    
     //================
     lazy var companyImageView: UIImageView = {
         let imageView = UIImageView(image: #imageLiteral(resourceName: "select_photo_empty"))

@@ -22,4 +22,21 @@ struct CoreDataManager {
         return container
     }()
     
+    func fetchCompanies() -> [Company] {
+        
+        let context = presistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<Company>(entityName: "Company")
+        
+        do {
+            let companies = try context.fetch(fetchRequest)
+            return companies
+        } catch let fetchError {
+            print("Failed to fetch error:", fetchError)
+            return []
+        }
+        
+    }
+    
+    
 }
