@@ -45,6 +45,7 @@ class CompaniesController: UITableViewController {
         tableView.register(CompanyCell.self, forCellReuseIdentifier: cellId)
         setupTableViewStyle()
         setupNavigationItem()
+        setupPlusButtonInNavBar(selector: #selector(handleAddCompany))
         
     }
     
@@ -60,7 +61,7 @@ class CompaniesController: UITableViewController {
         navigationItem.title = "Companies"
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Reset", style: .plain, target: self, action: #selector(handleReset))
         // Adding the plus sign image as the right bar button item
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "plus").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleAddCompany))
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "plus").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleAddCompany))
     }
     
     @objc private func handleReset() {

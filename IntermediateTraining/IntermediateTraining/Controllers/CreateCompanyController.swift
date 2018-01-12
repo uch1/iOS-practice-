@@ -127,6 +127,7 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
         
         view.backgroundColor = .darkGrayBlue
         setupNavigationItem()
+        setupCancelButton()
         setupUI()
     }
     
@@ -165,7 +166,7 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
     
     func setupNavigationItem() {
         //navigationItem.title = "Create Company"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleCancel))
+//        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleCancel))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(handleSave))
     }
     
@@ -235,9 +236,9 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
         }
     }
     
-    @objc private func handleCancel() {
-        print("Cancel pressed..")
-        dismiss(animated: true, completion: nil)
-    }
+//    @objc private func handleCancel() {
+//        print("Cancel pressed..")
+//        dismiss(animated: true, completion: nil)
+//    }
     
 }
