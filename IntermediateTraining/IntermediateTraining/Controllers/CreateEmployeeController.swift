@@ -8,7 +8,14 @@
 
 import UIKit
 
+protocol CreateEmployeeControllerDelegate {
+    func didAddEmployee(employee: Employee)
+    
+}
+
 class CreateEmployeeController: UIViewController {
+    
+    var delegate: CreateEmployeeControllerDelegate?
     
     let nameLabel: UILabel = {
         let label = UILabel()
@@ -41,19 +48,24 @@ class CreateEmployeeController: UIViewController {
     
     // LOOK HERE 
     @objc private func handleSave() {
+        
         guard let employeeName = nameTextField.text else { return }
         
-        let error = CoreDataManager.shared.createEmployee(employeeName: employeeName)
+        let tuple = CoreDataManager.shared.createEmployee(employeeName: employeeName)
         
-        if let error = error {
+        if let error = tuple.1 {
             // is where you present an error modal of some kind
             // perhaps use a UIAlertController to show your error message
             print(error)
         } else {
-            dismiss(animated: true, completion: nil)
+            // creation success
+            dismiss(animated: true, completion: {
+                guard let employee = tuple.0 else { return }
+                self.delegate?.didAddEmployee(employee: employee)
+            })
+            
         }
-        
-        
+    
     }
     
     func setupUI() {

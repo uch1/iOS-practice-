@@ -67,7 +67,7 @@ class CompaniesController: UITableViewController {
     @objc private func handleReset() {
         print("Attempting to delete all core data objects")
         
-        let context = CoreDataManager.shared.presistentContainer.viewContext
+        let context = CoreDataManager.shared.persistentContainer.viewContext
         
 //        companies.forEach { (company) in
 //            context.delete(company)

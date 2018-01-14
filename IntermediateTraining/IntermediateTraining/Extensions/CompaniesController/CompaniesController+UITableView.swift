@@ -51,7 +51,7 @@ extension CompaniesController {
             self.tableView.deleteRows(at: [indexPath], with: .automatic)
             
             // delete the company from Core Data
-            let context = CoreDataManager.shared.presistentContainer.viewContext
+            let context = CoreDataManager.shared.persistentContainer.viewContext
             context.delete(company)
             
             do {

@@ -181,7 +181,7 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
     }
     
     private func saveCompanyChanges() {
-        let context = CoreDataManager.shared.presistentContainer.viewContext
+        let context = CoreDataManager.shared.persistentContainer.viewContext
 
         company?.name = nameTextField.text
         company?.founded = datePicker.date
@@ -207,7 +207,7 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
     private func createCompany() {
         print("Save company..")
         
-        let context = CoreDataManager.shared.presistentContainer.viewContext
+        let context = CoreDataManager.shared.persistentContainer.viewContext
         
         let company = NSEntityDescription.insertNewObject(forEntityName: "Company", into: context)
         
