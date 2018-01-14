@@ -12,7 +12,7 @@ struct CoreDataManager {
     
     static let shared = CoreDataManager() // will live forever as long as your application is stil alive, and it's properties will too
     
-    let presistentContainer: NSPersistentContainer = {
+    let persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "IntermediateTrainingModels")
         container.loadPersistentStores { (storeDescription, error) in
             if let error = error {
@@ -24,7 +24,7 @@ struct CoreDataManager {
     
     func fetchCompanies() -> [Company] {
         
-        let context = presistentContainer.viewContext
+        let context = persistentContainer.viewContext
         
         let fetchRequest = NSFetchRequest<Company>(entityName: "Company")
         
@@ -38,5 +38,25 @@ struct CoreDataManager {
         
     }
     
+    // LOOK HERE 
+    func createEmployee(employeeName: String) -> Error? {
+        let context = persistentContainer.viewContext
+        
+        // create employee
+        let employee = NSEntityDescription.insertNewObject(forEntityName: "Employee", into: context)
+        
+        employee.setValue(employeeName, forKey: "name")
+        
+        do {
+            try context.save()
+            // save succeeds
+            return nil
+            
+        } catch let error {
+            print("Failed to create employee:", error)
+            return error
+        }
+        
+    }
     
 }
