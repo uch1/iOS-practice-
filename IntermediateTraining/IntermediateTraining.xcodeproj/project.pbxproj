@@ -94,13 +94,12 @@
 				80A30EB71FF741B900585E1D /* Controllers */,
 				80A30EBA1FF741F300585E1D /* Extensions */,
 				80951E512008305E001A3D38 /* Helpers */,
+				80E34B072016E2B600FF0CE6 /* Core Data */,
 				8056DDA11FF6ED0500CD6EA9 /* AppDelegate.swift */,
 				8056DDA51FF6ED0500CD6EA9 /* Main.storyboard */,
 				8056DDA81FF6ED0500CD6EA9 /* Assets.xcassets */,
 				8056DDAA1FF6ED0500CD6EA9 /* LaunchScreen.storyboard */,
 				8056DDAD1FF6ED0500CD6EA9 /* Info.plist */,
-				800355961FF8693A00C467BA /* IntermediateTrainingModels.xcdatamodeld */,
-				800355991FFB158500C467BA /* CoreDataManager.swift */,
 			);
 			path = IntermediateTraining;
 			sourceTree = "<group>";
@@ -165,6 +164,15 @@
 				80951E492007E3CC001A3D38 /* Colors */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		80E34B072016E2B600FF0CE6 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				800355961FF8693A00C467BA /* IntermediateTrainingModels.xcdatamodeld */,
+				800355991FFB158500C467BA /* CoreDataManager.swift */,
+			);
+			path = "Core Data";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
