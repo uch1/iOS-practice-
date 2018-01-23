@@ -132,10 +132,8 @@
 		80A30EB71FF741B900585E1D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				8056DDA31FF6ED0500CD6EA9 /* CompaniesController.swift */,
-				800355941FF7EE1B00C467BA /* CreateCompanyController.swift */,
-				80951E4F2008288F001A3D38 /* EmployeesController.swift */,
-				80951E54200844B0001A3D38 /* CreateEmployeeController.swift */,
+				80E34B0920177C9B00FF0CE6 /* Companies  */,
+				80E34B0A20177CD300FF0CE6 /* Employees */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -173,6 +171,24 @@
 				800355991FFB158500C467BA /* CoreDataManager.swift */,
 			);
 			path = "Core Data";
+			sourceTree = "<group>";
+		};
+		80E34B0920177C9B00FF0CE6 /* Companies  */ = {
+			isa = PBXGroup;
+			children = (
+				8056DDA31FF6ED0500CD6EA9 /* CompaniesController.swift */,
+				800355941FF7EE1B00C467BA /* CreateCompanyController.swift */,
+			);
+			path = "Companies ";
+			sourceTree = "<group>";
+		};
+		80E34B0A20177CD300FF0CE6 /* Employees */ = {
+			isa = PBXGroup;
+			children = (
+				80951E4F2008288F001A3D38 /* EmployeesController.swift */,
+				80951E54200844B0001A3D38 /* CreateEmployeeController.swift */,
+			);
+			path = Employees;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
