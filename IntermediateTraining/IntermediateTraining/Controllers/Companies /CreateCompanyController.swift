@@ -28,7 +28,6 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
 
             guard let founded = company?.founded else { return }
             datePicker.date = founded
-            
         }
     }
     

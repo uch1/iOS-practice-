@@ -62,6 +62,7 @@ class PageCell: UICollectionViewCell {
         topImageContainerView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         topImageContainerView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         topImageContainerView.addSubview(thumbImageView)
+        topImageContainerView.backgroundColor = .blue
         
         thumbImageView.centerXAnchor.constraint(equalTo: topImageContainerView.centerXAnchor).isActive = true
         thumbImageView.centerYAnchor.constraint(equalTo: topImageContainerView.centerYAnchor).isActive = true
