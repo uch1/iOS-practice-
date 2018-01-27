@@ -8,32 +8,132 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, URLSessionDownloadDelegate {
 
-    let shapeLayer = CAShapeLayer()
+    var shapeLayer: CAShapeLayer!
 
+    var pulsatingLayer: CAShapeLayer!
+    
+    let percentageLable: UILabel = {
+        let label = UILabel()
+        label.text = "Start"
+        label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 32)
+        label.textColor = .white
+        return label
+    }()
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
+    private func setupNotificationObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(handleEnterForeground), name: .UIApplicationWillEnterForeground, object: nil)
+    }
+    
+    @objc private func handleEnterForeground() {
+        animatePulsatingLayer()
+    }
+    
+    private func createCircleShapeLayer(strokeColor: UIColor, fillColor: UIColor) -> CAShapeLayer {
+        let layer = CAShapeLayer()
+        let circularPath = UIBezierPath(arcCenter: .zero, radius: 100, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: true)
+        
+        layer.path = circularPath.cgPath
+        layer.strokeColor = strokeColor.cgColor
+        layer.lineWidth = 20
+        layer.lineCap = kCALineCapRound
+        layer.fillColor = fillColor.cgColor
+        layer.position = view.center
+        
+        return layer
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // let's start by drawing a circle somehow
+        setupNotificationObservers()
         
-        let center = view.center
-        let circularPath = UIBezierPath(arcCenter: center, radius: 100, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: true)
-        shapeLayer.path = circularPath.cgPath
+        view.backgroundColor = UIColor.backgroundColor
         
-        shapeLayer.strokeColor = UIColor.red.cgColor
-        shapeLayer.lineWidth = 10
+        //let center = view.center
+        // Create a track layer
         
-        view.layer.addSublayer(shapeLayer)
+        setupCircleLayers()
         
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
         
+        setupPercentageLabel()
+    }
+    
+    private func setupPercentageLabel() {
+        view.addSubview(percentageLable)
+        percentageLable.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        percentageLable.center = view.center
+    }
+    
+    private func setupCircleLayers() {
+        pulsatingLayer = createCircleShapeLayer(strokeColor: .clear, fillColor: UIColor.pulsatingFillColor)
+        view.layer.addSublayer(pulsatingLayer)
+        animatePulsatingLayer()
+        
+        
+        let trackLayer = createCircleShapeLayer(strokeColor: .trackStrokeColor, fillColor: .backgroundColor)
+        view.layer.addSublayer(trackLayer)
+        
+        
+        shapeLayer = createCircleShapeLayer(strokeColor: .outlineStrokeColor, fillColor: .clear)
+        shapeLayer.strokeEnd = 0
+        shapeLayer.transform = CATransform3DMakeRotation(-CGFloat.pi / 2, 0, 0, 1)
+        view.layer.addSublayer(shapeLayer)
+    }
+    
+    private func animatePulsatingLayer() {
+        let animation = CABasicAnimation(keyPath: "transform.scale")
+        
+        animation.toValue = 1.5
+        animation.duration = 0.8
+        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+        animation.autoreverses = true
+        animation.repeatCount = Float.infinity
+        
+        pulsatingLayer.add(animation, forKey: "pulsing")
     }
 
-    @objc private func handleTap() {
-        print("Attempting to animate stroke")
+    let urlString = "https://s3-us-west-2.amazonaws.com/mob3/image_collection.json"
+    
+    private func beginDownloadingFile() {
+        print("Attempting to download file")
         
+        shapeLayer.strokeEnd = 0
+        
+        let configuration = URLSessionConfiguration.default
+        let operationQueue = OperationQueue()
+        let urlSession = URLSession(configuration: configuration, delegate: self, delegateQueue: operationQueue)
+        
+        guard let url = URL(string: urlString) else { return }
+        let downloadTask = urlSession.downloadTask(with: url)
+        downloadTask.resume()
+    }
+    
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
+        //(totalBytesWritten, totalBytesExpectedToWrite)
+        
+        let percentage = CGFloat(totalBytesWritten) / CGFloat(totalBytesExpectedToWrite)
+        
+        DispatchQueue.main.async {
+            self.percentageLable.text = "\(Int(percentage * 100))%"
+            self.shapeLayer.strokeEnd = percentage
+        }
+        
+        print(percentage)
+    }
+    
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+        print("Finished downloading files")
+    }
+    
+    fileprivate func animateCircle() {
         let basicAnimation = CABasicAnimation(keyPath: "strokeEnd")
         basicAnimation.toValue = 1
         basicAnimation.duration = 2
@@ -41,6 +141,12 @@ class ViewController: UIViewController {
         basicAnimation.isRemovedOnCompletion = false
         
         shapeLayer.add(basicAnimation, forKey: "basic")
+    }
+    
+    @objc private func handleTap() {
+        print("Attempting to animate stroke")
+        beginDownloadingFile()
+        //animateCircle()
     }
 
 }
