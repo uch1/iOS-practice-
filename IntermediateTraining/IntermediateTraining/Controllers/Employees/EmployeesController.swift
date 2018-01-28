@@ -9,6 +9,16 @@
 import UIKit
 import CoreData
 
+class IndentedLabel: UILabel {
+    
+    override func drawText(in rect: CGRect) {
+        let insets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
+        let customRect = UIEdgeInsetsInsetRect(rect, insets)
+        super.drawText(in: customRect)
+    }
+    
+}
+
 class EmployeesController: UITableViewController {
     
     let cellID = "cellID"
@@ -16,6 +26,11 @@ class EmployeesController: UITableViewController {
     var company: Company?
     
     var employees = [Employee]()
+    var shortNameEmployees = [Employee]()
+    var longNameEmployees = [Employee]()
+    var reallyLongNameEmployees = [Employee]()
+    
+    var allEmployees = [[Employee]]()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -27,7 +42,35 @@ class EmployeesController: UITableViewController {
     private func fetchEmployees() {
         guard let companyEmployees = company?.employees?.allObjects as? [Employee] else { return }
         
-        self.employees = companyEmployees
+        shortNameEmployees = companyEmployees.filter({ (employee) -> Bool in
+            
+            if let count = employee.name?.count {
+                return count < 6
+            }
+            return false
+        })
+        
+        longNameEmployees = companyEmployees.filter({ (employee) -> Bool in
+            
+            if let count = employee.name?.count {
+                return count > 6 && count < 6
+            }
+            return false
+        })
+        
+        reallyLongNameEmployees = companyEmployees.filter({ (employee) -> Bool in
+            
+            if let count = employee.name?.count {
+                return count > 9
+            }
+            return false
+        })
+        
+        allEmployees = [shortNameEmployees, longNameEmployees, reallyLongNameEmployees]
+        
+        print(shortNameEmployees.count, longNameEmployees.count, reallyLongNameEmployees.count)
+        
+//        self.employees = companyEmployees
         
 //        print("Trying to fetch employees..")
 //

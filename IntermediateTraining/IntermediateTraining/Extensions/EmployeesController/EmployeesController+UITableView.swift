@@ -11,13 +11,29 @@ import UIKit
 extension EmployeesController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return employees.count
+        
+        return allEmployees[section].count
+        
+//        if section == 0 {
+//            return shortNameEmployees.count
+//        }
+//        return longNameEmployees.count
+        //return employees.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
         
-        let employee = employees[indexPath.row]
+//        if indexPath.section == 0 {
+//
+//        }
+        
+        // use a ternary operator
+        //let employee = employees[indexPath.row]
+        //let employee = indexPath.section == 0 ? shortNameEmployees[indexPath.row] : longNameEmployees[indexPath.row]
+        
+        let employee = allEmployees[indexPath.section][indexPath.row]
+        
         cell.textLabel?.text = employee.name
         
         if let birthday = employee.employeeInformation?.birthday {
@@ -38,5 +54,44 @@ extension EmployeesController {
         return cell
     }
     
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        let label = IndentedLabel()
+        
+        if section == 0 {
+            label.text = "Short Names"
+        } else if section == 1 {
+            label.text = "Long Names"
+        } else {
+            label.text = "Really Long Names"
+        }
+        
+        label.backgroundColor = UIColor.lightBlue
+        label.textColor = UIColor.darkGrayBlue
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        
+        return label
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
+    }
     
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
