@@ -28,6 +28,8 @@ class ViewController: UIViewController, URLSessionDownloadDelegate {
     }
     
     private func setupNotificationObservers() {
+        // Why? So in case the app is terminated..., but once it's reopened, the animation will restart
+        // The animation should reset if the app was terminated
         NotificationCenter.default.addObserver(self, selector: #selector(handleEnterForeground), name: .UIApplicationWillEnterForeground, object: nil)
     }
     
