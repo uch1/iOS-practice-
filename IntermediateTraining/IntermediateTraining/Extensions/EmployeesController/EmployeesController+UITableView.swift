@@ -64,14 +64,15 @@ extension EmployeesController {
         
         let label = IndentedLabel()
         
-        if section == 0 {
-            label.text = "Short Names"
-        } else if section == 1 {
-            label.text = "Long Names"
-        } else {
-            label.text = "Really Long Names"
-        }
+//        if section == 0 {
+//            label.text = EmployeeType.Executive.rawValue
+//        } else if section == 1 {
+//            label.text = EmployeeType.SeniorManagement.rawValue
+//        } else {
+//            label.text = EmployeeType.Staff.rawValue
+//        }
         
+        label.text = employeeTypes[section]
         label.backgroundColor = UIColor.lightBlue
         label.textColor = UIColor.darkGrayBlue
         label.font = UIFont.boldSystemFont(ofSize: 16)

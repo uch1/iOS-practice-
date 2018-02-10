@@ -11,8 +11,21 @@ import UIKit
 extension EmployeesController: CreateEmployeeControllerDelegate {
     
     func didAddEmployee(employee: Employee) {
-        employees.append(employee)
-        tableView.reloadData()
+        // employees.append(employee)
+//        fetchEmployees()
+//        tableView.reloadData()
+        
+        
+        guard let section = employeeTypes.index(of: employee.type!) else { return }
+        
+        let row = allEmployees[section].count
+        
+        // what is the insertion index path?
+        let insertionIndexPath = IndexPath(row: row, section: section)
+        
+        allEmployees[section].append(employee)
+        
+        tableView.insertRows(at: [insertionIndexPath], with: .middle)
     }
     
 }

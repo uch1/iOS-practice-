@@ -26,11 +26,17 @@ class EmployeesController: UITableViewController {
     var company: Company?
     
     var employees = [Employee]()
-    var shortNameEmployees = [Employee]()
-    var longNameEmployees = [Employee]()
-    var reallyLongNameEmployees = [Employee]()
+//    var shortNameEmployees = [Employee]()
+//    var longNameEmployees = [Employee]()
+//    var reallyLongNameEmployees = [Employee]()
     
     var allEmployees = [[Employee]]()
+    var employeeTypes = [
+        EmployeeType.Executive.rawValue,
+        EmployeeType.SeniorManagement.rawValue,
+        EmployeeType.Staff.rawValue,
+        EmployeeType.Intern.rawValue
+    ]
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -39,36 +45,59 @@ class EmployeesController: UITableViewController {
         
     }
     
-    private func fetchEmployees() {
+    func fetchEmployees() {
         guard let companyEmployees = company?.employees?.allObjects as? [Employee] else { return }
     
-        shortNameEmployees = companyEmployees.filter({ (employee) -> Bool in
+        allEmployees = []
+        // let's use my array and loop to filter instead
+        employeeTypes.forEach { (employeeType) in
             
-            if let count = employee.name?.count {
-                return count < 6
-            }
-            return false
-        })
+            // somehow construct my allEmployees array 
+            allEmployees.append(
+                companyEmployees.filter { $0.type == employeeType }
+            )
+        }
         
-        longNameEmployees = companyEmployees.filter({ (employee) -> Bool in
-            
-            if let count = employee.name?.count {
-                return count > 6 && count < 9
-            }
-            return false
-        })
+        // let's filter employees for "Executives"
+//        let executive = companyEmployees.filter { (employee) -> Bool in
+//            return employee.type == EmployeeType.Executive.rawValue
+//        }
+//
+//        let seniorManagement = companyEmployees.filter { $0.type == EmployeeType.SeniorManagement.rawValue }
+//
+//        allEmployees = [
+//            executive,
+//            seniorManagement,
+//            companyEmployees.filter { $0.type == EmployeeType.Staff.rawValue }
+//        ]
         
-        reallyLongNameEmployees = companyEmployees.filter({ (employee) -> Bool in
-            
-            if let count = employee.name?.count {
-                return count > 9
-            }
-            return false
-        })
-        
-        allEmployees = [shortNameEmployees, longNameEmployees, reallyLongNameEmployees]
-        
-        print(shortNameEmployees.count, longNameEmployees.count, reallyLongNameEmployees.count)
+//        shortNameEmployees = companyEmployees.filter({ (employee) -> Bool in
+//
+//            if let count = employee.name?.count {
+//                return count < 6
+//            }
+//            return false
+//        })
+//
+//        longNameEmployees = companyEmployees.filter({ (employee) -> Bool in
+//
+//            if let count = employee.name?.count {
+//                return count > 6 && count < 9
+//            }
+//            return false
+//        })
+//
+//        reallyLongNameEmployees = companyEmployees.filter({ (employee) -> Bool in
+//
+//            if let count = employee.name?.count {
+//                return count > 9
+//            }
+//            return false
+//        })
+//
+//        allEmployees = [shortNameEmployees, longNameEmployees, reallyLongNameEmployees]
+//
+//        print(shortNameEmployees.count, longNameEmployees.count, reallyLongNameEmployees.count)
         
 //        self.employees = companyEmployees
         
