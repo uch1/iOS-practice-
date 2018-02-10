@@ -41,7 +41,7 @@ class EmployeesController: UITableViewController {
     
     private func fetchEmployees() {
         guard let companyEmployees = company?.employees?.allObjects as? [Employee] else { return }
-        
+    
         shortNameEmployees = companyEmployees.filter({ (employee) -> Bool in
             
             if let count = employee.name?.count {
@@ -53,7 +53,7 @@ class EmployeesController: UITableViewController {
         longNameEmployees = companyEmployees.filter({ (employee) -> Bool in
             
             if let count = employee.name?.count {
-                return count > 6 && count < 6
+                return count > 6 && count < 9
             }
             return false
         })

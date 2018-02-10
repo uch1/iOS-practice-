@@ -33,8 +33,7 @@ struct CoreDataManager {
             return companies
         } catch let fetchError {
             print("Failed to fetch error:", fetchError)
-            return []
-        }
+            return []         }
         
     }
     

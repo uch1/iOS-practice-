@@ -21,6 +21,10 @@ extension EmployeesController {
         //return employees.count
     }
     
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return allEmployees.count
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
         
@@ -54,10 +58,8 @@ extension EmployeesController {
         return cell
     }
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
-    }
     
+    // Create Seperate Headers
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let label = IndentedLabel()

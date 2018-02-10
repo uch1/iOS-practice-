@@ -12,7 +12,7 @@ class CompanyCell: UITableViewCell {
    
     var company: Company? {
         didSet {
-            nameFoundedDateLabel.text = company?.name
+            //nameFoundedDateLabel.text = company?.name
             
             if let imageData = company?.imageData {
                 companyImageView.image = UIImage(data: imageData)
