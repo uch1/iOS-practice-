@@ -45,8 +45,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow()
         window?.makeKeyAndVisible()
         
-        let companiesController = CompaniesController()
-        let navigationController = CustomNavigationController(rootViewController: companiesController)
+        let companiesAutoUpdateController = CompaniesAutoUpdateController()
+        let navigationController = CustomNavigationController(rootViewController: companiesAutoUpdateController)
         window?.rootViewController = navigationController
         
         return true

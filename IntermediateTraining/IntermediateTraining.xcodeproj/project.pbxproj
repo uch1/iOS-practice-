@@ -26,6 +26,7 @@
 		80A30EBC1FF7420A00585E1D /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A30EBB1FF7420A00585E1D /* Company.swift */; };
 		80A3A20420041F6A0022ECB6 /* CompanyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A3A20320041F6A0022ECB6 /* CompanyCell.swift */; };
 		80D89BD7202F98BD00F4D008 /* EmployeeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D89BD6202F98BD00F4D008 /* EmployeeType.swift */; };
+		80D89BD920301F9600F4D008 /* CompaniesAutoUpdateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D89BD820301F9600F4D008 /* CompaniesAutoUpdateController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		80A30EBB1FF7420A00585E1D /* Company.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
 		80A3A20320041F6A0022ECB6 /* CompanyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyCell.swift; sourceTree = "<group>"; };
 		80D89BD6202F98BD00F4D008 /* EmployeeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeType.swift; sourceTree = "<group>"; };
+		80D89BD820301F9600F4D008 /* CompaniesAutoUpdateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompaniesAutoUpdateController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +181,7 @@
 		80E34B0920177C9B00FF0CE6 /* Companies  */ = {
 			isa = PBXGroup;
 			children = (
+				80D89BD820301F9600F4D008 /* CompaniesAutoUpdateController.swift */,
 				8056DDA31FF6ED0500CD6EA9 /* CompaniesController.swift */,
 				800355941FF7EE1B00C467BA /* CreateCompanyController.swift */,
 			);
@@ -266,6 +269,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				80D89BD920301F9600F4D008 /* CompaniesAutoUpdateController.swift in Sources */,
 				80951E4C2007E475001A3D38 /* CompaniesController+CreateCompany.swift in Sources */,
 				80A30EB61FF7314B00585E1D /* UIColor+theme.swift in Sources */,
 				8056DDA41FF6ED0500CD6EA9 /* CompaniesController.swift in Sources */,
