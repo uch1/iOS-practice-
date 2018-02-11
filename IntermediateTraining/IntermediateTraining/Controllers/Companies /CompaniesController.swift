@@ -59,9 +59,49 @@ class CompaniesController: UITableViewController {
     // This func setups the navigation bar item
     private func setupNavigationItem() {
         navigationItem.title = "Companies"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Reset", style: .plain, target: self, action: #selector(handleReset))
+        
+        navigationItem.leftBarButtonItems = [
+            UIBarButtonItem(title: "Reset", style: .plain, target: self, action: #selector(handleReset)),
+            UIBarButtonItem(title: "Do Work", style: .plain, target: self, action: #selector(doWork))
+        ]
+        
+//        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Reset", style: .plain, target: self, action: #selector(handleReset))
         // Adding the plus sign image as the right bar button item
 //        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "plus").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleAddCompany))
+    }
+    
+    @objc private func doWork() {
+        
+        print("Trying to do work...")
+        
+        CoreDataManager.shared.persistentContainer.performBackgroundTask { (backgroundContext) in
+            
+            (0...10000).forEach { (value) in
+                print(value)
+                let company = Company(context: backgroundContext)
+                company.name = String(value)
+                
+            }
+            
+            do {
+                try backgroundContext.save()
+            } catch let error {
+                print("Failed to save:", error)
+            }
+            
+            
+        }
+        
+        
+        // GCD - Grand Central Dispatch
+//        DispatchQueue.global(qos: .background).async {
+//
+//            let context = CoreDataManager.shared.persistentContainer.viewContext
+//
+//
+//
+//        }
+
     }
     
     @objc private func handleReset() {
