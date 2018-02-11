@@ -62,12 +62,76 @@ class CompaniesController: UITableViewController {
         
         navigationItem.leftBarButtonItems = [
             UIBarButtonItem(title: "Reset", style: .plain, target: self, action: #selector(handleReset)),
-            UIBarButtonItem(title: "Do Updates", style: .plain, target: self, action: #selector(doUpdates))
+            UIBarButtonItem(title: "Do Nested Updates", style: .plain, target: self, action: #selector(doNestedUpdates))
         ]
         
 //        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Reset", style: .plain, target: self, action: #selector(handleReset))
         // Adding the plus sign image as the right bar button item
 //        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "plus").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleAddCompany))
+    }
+    
+    @objc private func doNestedUpdates() {
+        print("Trying to perform nested updates now...")
+        
+        
+        DispatchQueue.global(qos: .background).async {
+            
+            // we'll try to perform our updates
+            
+            // we'll first construct a custom MOC
+            
+            let privateContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+            
+            privateContext.parent = CoreDataManager.shared.persistentContainer.viewContext
+            
+            // execute updates on privateContext now
+            
+            let request: NSFetchRequest<Company> = Company.fetchRequest()
+            request.fetchLimit = 1
+            
+            do {
+                
+                let companies = try privateContext.fetch(request)
+                
+                companies.forEach({ (company) in
+                    print(company.name ?? "")
+                    company.name = "D: \(company.name ?? "")"
+                })
+                
+                do {
+                    try privateContext.save()
+                    
+                    // after private context save succeeds
+                    
+                    DispatchQueue.main.async {
+                        
+                        do {
+                            
+                            let context = CoreDataManager.shared.persistentContainer.viewContext
+                            
+                            if context.hasChanges {
+                                try context.save()
+                            }
+        
+                            self.tableView.reloadData()
+                            
+                        } catch let finalSaveError {
+                            print("Failed to save main context:", finalSaveError)
+                        }
+                        
+                    }
+                    
+                } catch let saveError {
+                    
+                    print("Failed to save on private context:", saveError)
+                }
+                
+                
+            } catch let fetchError {
+                print("Failed to fetch on private context:", fetchError)
+            }
+            
+        }
     }
     
     @objc private func doUpdates() {
@@ -97,7 +161,7 @@ class CompaniesController: UITableViewController {
                         // you don't want to refetch everything if your're just simply updating one or two companies
                         self.companies = CoreDataManager.shared.fetchCompanies()
                         
-                        // is there a way to just merger the changes that you made onto the main view context? YASSSS!!!!   
+                        // is there a way to just merger the changes that you made onto the main view context? YASSSS!!!!
                         self.tableView.reloadData()
                     }
                     
