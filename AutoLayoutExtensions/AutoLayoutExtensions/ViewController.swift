@@ -41,7 +41,7 @@ class ViewController: UIViewController {
         let purpleView = UIView()
         purpleView.backgroundColor = .purple
         view.addSubview(purpleView)
-        purpleView.fillSuperview()
+        purpleView.fillSuperViewWithNoPadding()
         
 //        redView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -60,9 +60,12 @@ class ViewController: UIViewController {
 
 extension UIView {
     
-    func fillSuperview() {
-        anchor(top: superview?.topAnchor, leading: superview?.leadingAnchor, bottom: superview?.bottomAnchor, trailing: superview?.trailingAnchor)
-        
+    func fillSuperview(padding: UIEdgeInsets) {
+        anchor(top: superview?.topAnchor, leading: superview?.leadingAnchor, bottom: superview?.bottomAnchor, trailing: superview?.trailingAnchor, padding: padding)
+    }
+    
+    func fillSuperViewWithNoPadding() {
+        fillSuperview(padding: .zero)
     }
     
     func anchorSize(to view: UIView) {
