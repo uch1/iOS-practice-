@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<playground version='6.0' target-platform='ios' display-mode='rendered'>
+    <pages>
+        <page name='01_enum_basics'/>
+        <page name='02_enum_static_mutating'/>
+        <page name='03_enum_nested'/>
+        <page name='01_optionals'/>
+        <page name='error_handling'/>
+        <page name='type_casting'/>
+        <page name='generics'/>
+        <page name='subscripts'/>
+        <page name='class_vs_struct'/>
+        <page name='sets_and_tuples'/>
+        <page name='extension'/>
+        <page name='operators'/>
+        <page name='convenience_init'/>
+        <page name='computed_property'/>
+        <page name='property_observer'/>
+        <page name='failable_init'/>
+        <page name='override_init_method_property'/>
+        <page name='two_phase_init '/>
+        <page name='type_property_and_method'/>
+        <page name='singleton'/>
+    </pages>
+</playground>

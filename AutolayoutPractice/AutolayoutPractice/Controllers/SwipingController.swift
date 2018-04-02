@@ -105,7 +105,7 @@ class SwipingController: UICollectionViewController {
         super.viewDidLoad()
         
         setupBottomControls()
-        collectionView?.backgroundColor = .yellow
+        collectionView?.backgroundColor = .white
         collectionView?.register(PageCell.self, forCellWithReuseIdentifier: "cellId")
         collectionView?.isPagingEnabled = true
     }
