@@ -4,5 +4,6 @@
         <page name='automatic_reference_counting'/>
         <page name='delegate_retain_cycle'/>
         <page name='closure_retain_cycle'/>
+        <page name='escaping_and_autoclosures'/>
     </pages>
 </playground>
